@@ -1,0 +1,45 @@
+class LinkedListNode:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+class Queue:
+    def __init__(self):
+        self.front = None  # Elemento al frente de la cola
+        self.rear = None   # Elemento al final de la cola
+
+    def enqueue(self, value):
+        node = LinkedListNode(value)
+        if self.rear:
+            self.rear.next = node
+        self.rear = node
+        if not self.front:
+            self.front = node
+
+    def dequeue(self):
+        if self.front:
+            value = self.front.value
+            self.front = self.front.next
+            if not self.front:
+                self.rear = None  # Si la cola queda vacía, rear también debe ser None
+            return value
+        return None
+
+queue = Queue()
+
+queue.enqueue(10)
+queue.enqueue(20)
+queue.enqueue(30)
+
+print("Cola actual:")
+values = []
+current = queue.front
+while current:
+    values.append(current.value)
+    current = current.next
+print(values)
+
+print("\nEliminando elementos:")
+print(queue.dequeue())
+print(queue.dequeue())
+print(queue.dequeue())
